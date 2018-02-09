@@ -1,0 +1,17 @@
+{
+  "name": "xls-php-node-app",
+  "version": "1.0.0",
+  "description": "parser for xls and php files",
+  "main": "xls-php-parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mwdowns",
+  "license": "ISC",
+  "dependencies": {
+    "js-xlsx": "^0.8.22",
+    "php-parser": "^2.2.0",
+    "php-unparser": "^0.2.3",
+    "xlsx-style": "^0.8.13"
+  }
+}
