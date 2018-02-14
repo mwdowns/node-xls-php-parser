@@ -4,6 +4,7 @@
 // var unparse = require('php-unparser');
 var php_parser = require('./php_category_parser.js');
 
-console.log(php_parser('categories.php'));
+var categories = php_parser('categories.php');
+console.log(categories);
 
 
