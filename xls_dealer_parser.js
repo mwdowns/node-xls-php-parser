@@ -1,8 +1,13 @@
 var xls = require('js-xlsx');
 
 module.exports = function(file) {
-    var workbook = xls.readFile(file);
 
+    if (typeof file != 'string') {
+        console.log('you must use a file name as a string');
+        return;
+    }
+
+    var workbook = xls.readFile(file);
     var sheet = workbook.SheetNames[0];
     var data = workbook.Sheets[sheet];
     var xlsHeadings = {};
@@ -23,7 +28,7 @@ module.exports = function(file) {
             if (row in dealersKey) {
                 column = cell[0];
                 var index = (Object.keys(dealersKey).length) - 1;
-                dealers[index][row].push({[xlsHeadings[column]]: data[cell].v});
+                dealers[index][row].push({[xlsHeadings[column].toLowerCase()]: data[cell].v});
             } else {
                 dealersKey[row] = 'pushed';
                 column = cell[0];
