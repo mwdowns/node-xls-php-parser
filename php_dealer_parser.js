@@ -2,6 +2,11 @@ var fs = require('fs');
 var path = require('path');
 var php_read = require('php-parser');
 
+/*This function parses our dealers.php file and extracts the dealers and the info for them including id, email, emailCC, and cars array (the last 3 being what the XLS wants to update).
+Parameters => a php file (string)
+Returns => Array of elements index0 being (string) dealer id, index1 being an array of (strings) emails, index2 being and array of (strings) emails, and index3 being an array of (strings) model ids.
+*/
+
 module.exports = function(file) {
     var php_parser = new php_read({
         parser: {

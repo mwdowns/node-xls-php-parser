@@ -16,3 +16,10 @@ var Codes = categories[1];
 
 var dealersInfo = php_dealer_parser('dealers.php');
 console.log(dealersInfo[0]);
+
+var dealersLen = dealers.length;
+for (var i = 0; i < dealersLen; i++) {
+    var dealerRow = Object.keys(dealers[i]);
+    var dealer = dealers[i][dealerRow[0]];
+    // console.log(dealer);
+}

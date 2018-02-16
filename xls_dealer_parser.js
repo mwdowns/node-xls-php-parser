@@ -1,5 +1,10 @@
 var xls = require('js-xlsx');
 
+/*This function parses a given xls file (with a known format) and extracts the information in those rows
+Parameters => an xls file (string)
+Returns => Array of objects with keys being row numbers and value being an array of arrays. The arrays follow the pattern index0 is a heading, index1 is value.
+*/
+
 module.exports = function(file) {
 
     if (typeof file != 'string') {
@@ -28,11 +33,11 @@ module.exports = function(file) {
             if (row in dealersKey) {
                 column = cell[0];
                 var index = (Object.keys(dealersKey).length) - 1;
-                dealers[index][row].push({[xlsHeadings[column].toLowerCase()]: data[cell].v});
+                dealers[index][row].push([xlsHeadings[column].toLowerCase(), data[cell].v]);
             } else {
                 dealersKey[row] = 'pushed';
                 column = cell[0];
-                dealers.push({[row]: [{[xlsHeadings[column]]: data[cell].v}]});
+                dealers.push({[row]: [['dealerID', data[cell].v]]});
             }
         }
     }
