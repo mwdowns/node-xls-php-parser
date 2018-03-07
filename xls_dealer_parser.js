@@ -11,35 +11,70 @@ module.exports = function(file) {
         console.log('you must use a file name as a string');
         return;
     }
-
-    var workbook = xls.readFile(file);
-    var sheet = workbook.SheetNames[0];
-    var data = workbook.Sheets[sheet];
-    var xlsHeadings = {};
-    var dealersKey = {};
-    var dealers = [];
-    var row;
-    var column;
-    for (var cell in data) {
-        /* all keys that do not begin with "!" correspond to cell addresses */
-        if(cell[0] === '!') continue;
-        if(cell[1] === '3') xlsHeadings[cell[0]] = data[cell].v;
-        if (cell[2]) {
-            row = parseInt(cell[1] + cell[2]);
-        } else {
-            row = parseInt(cell[1]);
-        }
-        if(row > 3) {
-            if (row in dealersKey) {
-                column = cell[0];
-                var index = (Object.keys(dealersKey).length) - 1;
-                dealers[index][row].push([xlsHeadings[column].toLowerCase(), data[cell].v]);
+    console.log(file);
+    xls.readFile(file)
+    .try(function(returnedData) {
+        var workbook = returnedData;
+        var sheet = workbook.SheetNames[0];
+        var data = workbook.Sheets[sheet];
+        var xlsHeadings = {};
+        var dealersKey = {};
+        var dealers = [];
+        var row;
+        var column;
+        for (var cell in data) {
+            /* all keys that do not begin with "!" correspond to cell addresses */
+            if(cell[0] === '!') continue;
+            if(cell[1] === '3') xlsHeadings[cell[0]] = data[cell].v;
+            if (cell[2]) {
+                row = parseInt(cell[1] + cell[2]);
             } else {
-                dealersKey[row] = 'pushed';
-                column = cell[0];
-                dealers.push({[row]: [['dealerID', data[cell].v]]});
+                row = parseInt(cell[1]);
+            }
+            if(row > 3) {
+                if (row in dealersKey) {
+                    column = cell[0];
+                    var index = (Object.keys(dealersKey).length) - 1;
+                    dealers[index][row].push([xlsHeadings[column].toLowerCase(), data[cell].v]);
+                } else {
+                    dealersKey[row] = 'pushed';
+                    column = cell[0];
+                    dealers.push({[row]: [['dealerID', data[cell].v]]});
+                }
             }
         }
-    }
-    return dealers;
+        return dealers;
+    })
+    .catch(function(err) {
+        return ['that dealers.xls file aint no good'];
+    });
+    // var sheet = workbook.SheetNames[0];
+    // var data = workbook.Sheets[sheet];
+    // var xlsHeadings = {};
+    // var dealersKey = {};
+    // var dealers = [];
+    // var row;
+    // var column;
+    // for (var cell in data) {
+    //     /* all keys that do not begin with "!" correspond to cell addresses */
+    //     if(cell[0] === '!') continue;
+    //     if(cell[1] === '3') xlsHeadings[cell[0]] = data[cell].v;
+    //     if (cell[2]) {
+    //         row = parseInt(cell[1] + cell[2]);
+    //     } else {
+    //         row = parseInt(cell[1]);
+    //     }
+    //     if(row > 3) {
+    //         if (row in dealersKey) {
+    //             column = cell[0];
+    //             var index = (Object.keys(dealersKey).length) - 1;
+    //             dealers[index][row].push([xlsHeadings[column].toLowerCase(), data[cell].v]);
+    //         } else {
+    //             dealersKey[row] = 'pushed';
+    //             column = cell[0];
+    //             dealers.push({[row]: [['dealerID', data[cell].v]]});
+    //         }
+    //     }
+    // }
+    // return dealers;
 };
