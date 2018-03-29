@@ -1,10 +1,10 @@
 // Node app for parsing xls file and php file and merging the xls info into the php file.
 
 // var unparse = require('php-unparser');
-var php_category_parser = require('./php_category_parser.js');
-var xls_dealer_parser = require('./xls_dealer_parser.js');
-var php_dealer_parser = require('./php_dealer_parser.js');
-var php_maker = require('./php_dealer_creater');
+var php_category_parser = require('./modules/php_category_parser.js');
+var xls_dealer_parser = require('./modules/xls_dealer_parser.js');
+var php_dealer_parser = require('./modules/php_dealer_parser.js');
+var php_maker = require('./modules/php_dealer_creater');
 var fs = require('fs');
 var readline = require('readline');
 var rl = readline.createInterface({
