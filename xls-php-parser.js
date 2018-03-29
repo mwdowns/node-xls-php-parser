@@ -1,9 +1,10 @@
 // Node app for parsing xls file and php file and merging the xls info into the php file.
 
 // var unparse = require('php-unparser');
-var php_parser = require('./php_category_parser.js');
+var php_category_parser = require('./php_category_parser.js');
 var xls_dealer_parser = require('./xls_dealer_parser.js');
 var php_dealer_parser = require('./php_dealer_parser.js');
+var php_maker = require('./php_dealer_creater');
 var fs = require('fs');
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -17,7 +18,7 @@ rl.question('What is the path to the XLS file? ', (answer1) => {
     rl.question('What is the path to the dealers PHP file? ', (answer2) => {
         var dealersInfo = php_dealer_parser(answer2);
         rl.question('What is the path to the categories PHP file? ', (answer3) => {
-            var categories = php_parser(answer3);
+            var categories = php_category_parser(answer3);
             if (typeof dealers[0] === 'string') {
                 console.log("Error: ", dealers[0]);
             } else if (typeof dealersInfo[0] === 'string') {
@@ -58,8 +59,18 @@ rl.question('What is the path to the XLS file? ', (answer1) => {
                     dealersToUpdate.push(dealerData);
                     return dealer;
                 });
+                console.log(dealersToUpdate[0]);
+                console.log(dealersInfo[0][0]);
+                dealersToUpdate.map(function(updatedInfo, index) {
+                    var key = Object.keys(updatedInfo)[0];
+                    if ( key === dealersInfo[0][index][0]) {
+                        dealersInfo[0][index][2] = updatedInfo[key].emails_cc;
+                        dealersInfo[0][index][3] = updatedInfo[key].models;
+                    }
+                    return updatedInfo;
+                });
+                php_maker(dealersInfo[0], dealersInfo[1]);
             }
-            console.log(dealersToUpdate[0]);
             rl.close();
         });
     });

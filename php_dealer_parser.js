@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var php_check = require('./php_check.js');
 var php_read = require('php-parser');
+var php_maker = require('./php_dealer_creater.js');
 
 /*This function parses our dealers.php file and extracts the dealers and the info for them including id, email, emailCC, and cars array (the last 3 being what the XLS wants to update).
 Parameters => a php file (string)
@@ -47,5 +48,5 @@ module.exports = function(file) {
         dealersInfo.push([entryID, entryEmails, entryCCEmails, entryCars]);
         return entry;
     });
-    return dealersInfo;
+    return [dealersInfo, php];
 };
