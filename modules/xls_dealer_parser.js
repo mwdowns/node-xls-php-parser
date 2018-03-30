@@ -1,4 +1,4 @@
-var xls = require('js-xlsx');
+var xls = require('xlsx');
 var xls_check = require('./xls_check.js');
 
 /*This function parses a given xls file (with a known format) and extracts the information in those rows

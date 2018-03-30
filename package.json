@@ -9,9 +9,8 @@
   "author": "mwdowns",
   "license": "ISC",
   "dependencies": {
-    "js-xlsx": "^0.8.22",
     "php-parser": "^2.2.0",
     "php-unparser": "^0.2.3",
-    "xlsx-style": "^0.8.13"
+    "xlsx": "^0.12.7"
   }
 }
