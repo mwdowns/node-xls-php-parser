@@ -11,7 +11,6 @@ module.exports = function(file) {
     if (!xls_check(file)) {
         return ['the dealers.xls file you provided, ' + file + ', is not a file or is not an xls file'];
     }
-
     var workbook = xls.readFile(file);
     var sheet = workbook.SheetNames[0];
     var data = workbook.Sheets[sheet];

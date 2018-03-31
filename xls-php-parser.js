@@ -14,10 +14,13 @@ var rl = readline.createInterface({
 var dealersToUpdate = [];
 
 rl.question('What is the path to the XLS file? ', (answer1) => {
+    answer1 = 'dealers.xls';
     var dealers = xls_dealer_parser(answer1);
     rl.question('What is the path to the dealers PHP file? ', (answer2) => {
+        answer2 = 'dealers.php';
         var dealersInfo = php_dealer_parser(answer2);
         rl.question('What is the path to the categories PHP file? ', (answer3) => {
+            answer3 = 'categories.php';
             var categories = php_category_parser(answer3);
             if (typeof dealers[0] === 'string') {
                 console.log("Error: ", dealers[0]);
@@ -59,8 +62,8 @@ rl.question('What is the path to the XLS file? ', (answer1) => {
                     dealersToUpdate.push(dealerData);
                     return dealer;
                 });
-                console.log(dealersToUpdate[0]);
-                console.log(dealersInfo[0][0]);
+                // console.log(dealersToUpdate[0]);
+                // console.log(dealersInfo[0][0]);
                 dealersToUpdate.map(function(updatedInfo, index) {
                     var key = Object.keys(updatedInfo)[0];
                     if ( key === dealersInfo[0][index][0]) {
