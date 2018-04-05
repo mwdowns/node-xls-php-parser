@@ -12,9 +12,9 @@ Files it needs to work:
 
 Dealers.xls looks like this:
 
-|Code|Descriptions|Emails|Cars|
-|:--:|:----:|:----:|:----:|
-|1 | Blah Dealer| blah@blah.com | Corolla|
+|Code|Descriptions|Emails|Corolla|CRV|...|
+|:--:|:----:|:----:|:----:|:---:|:---:|
+|1 | Blah Dealer| blah@blah.com | X | | X|
 |... |...|...|...|
 
 Dealers.php looks like this:
