@@ -20,7 +20,7 @@ var arrayCreater = function(key, value) {
 	if (Array.isArray(value)) {
 		var firstPart = "'" + key + "' " + '=> [\n';
 		var arrVals = [];
-		valLen = value.length - 1;
+		var valLen = value.length - 1;
 		var indent = "			";
 		value.map(function(entry, index) {
 			if (index === valLen) {
@@ -30,7 +30,7 @@ var arrayCreater = function(key, value) {
 			}
 			return entry;
 		});
-		lastPart = '\n' + indexTab + '],';
+		var lastPart = '\n' + indexTab + '],';
 		line = firstPart + arrVals.join('') + lastPart;
 	}
 	var middle = indexTab + line;
