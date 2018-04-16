@@ -39,18 +39,21 @@ var arrayCreater = function(key, value) {
 
 module.exports = function(updates, phpInFile) {
 	console.log(updates[0]);
-	// phpInFile.children[0].expr.items.map(function(item, index) {
-	// 	if (updates[0][0] === item.value.items[2].value.value) {
-	// 		console.log('yo!');
-	// 		console.log(updates[index][2]);
-	// 		console.log(item.value.items[6].value.items[0]);
-	// 		//map over updates[index][2] and updates[index][3] creating new entries for the php file
-	// 	}
-	// 	return item;
-	// });
+	phpInFile.children[0].expr.items.map(function(item, index) {
+		if (updates[0][0] === item.value.items[2].value.value) {
+			console.log('yo!');
+			// emails to update with
+			console.log(updates[index][2]);
+			// emails to be updated, so this array becomes the above array
+			console.log(item.value.items[6].value.items.length);
+			//map over updates[index][2] and updates[index][3] creating new entries for the php file
+		}
+		return item;
+	});
 	var head = '<?php\n\nreturn [\n';
 	var tail = '\n];';
 	var middle = [];
+	// we're going to have to map over a different array here
 	updates.map(function(entry, index) {
 		var stuff = [];
 		var begin = '	[\n';
