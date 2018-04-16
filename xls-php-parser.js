@@ -5,7 +5,7 @@ var php_category_parser = require('./modules/php_category_parser.js');
 var xls_dealer_parser = require('./modules/xls_dealer_parser.js');
 var php_dealer_parser = require('./modules/php_dealer_parser.js');
 var php_maker = require('./modules/php_dealer_creater');
-var updatesArrayCreator = require('./modules/updatesArrayCreator.js');
+var updates_array_creator = require('./modules/updatesArrayCreator.js');
 var fs = require('fs');
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -29,7 +29,7 @@ rl.question('What is the path to the XLS file? ', (answer1) => {
             } else if (typeof categories[0] === 'string') {
                 console.log("Error: ", categories[0]);
             } else {
-                var dealersToUpdate = updatesArrayCreator(categories, dealersXLSInfo);
+                var dealersToUpdate = updates_array_creator(categories, dealersXLSInfo);
                 dealersToUpateCreator(dealersToUpdate, dealersPHPInfo);
                 php_maker(dealersPHPInfo[0], dealersPHPInfo[1]);
             }
